@@ -1,4 +1,4 @@
-.container{
+.page-container {
     position: absolute;
     left: 0;
     right: 0;
@@ -7,20 +7,28 @@
     z-index: 0;
 }
 
-.page-container{
-    position: absolute;
-    left: 0;
-    right: 0;
-    top: 0;
-    bottom: 0;
-    z-index: 0;
+.tool-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 }
 
-.tools-bar{
-    margin-bottom: 16px;
+.alink {
+    cursor: pointer;
+    color: #155bd4;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
 }
 
-.onep-icon{
-    width: 18px;
-    height: 18px;
+.alink:focus,
+.alink:hover,
+.alink:visited {
+    text-decoration: none;
+    color: #155bd4;
+}
+
+/* 辅助方法 */
+.mgl6{
+    margin-left: 6px;
 }

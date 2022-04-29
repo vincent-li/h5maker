@@ -1,3 +1,4 @@
+import '@src/base.css';
 import '@src/global.css';
 import App from './Index.svelte';
 

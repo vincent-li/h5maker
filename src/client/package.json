@@ -5,6 +5,12 @@
   "repository": "https://github.com/brandonxiang/svelte-webpack-template.git",
   "author": "brandonxiang <1542453460@qq.com>",
   "license": "MIT",
+  "scripts": {
+    "build": "cross-env NODE_ENV=production webpack",
+    "dev": "webpack serve --hot --content-base public",
+    "analyze": "NODE_ENV=production webpack --env.analyze=true --mode=production --progress",
+    "format": "prettier --write --svelte-sort-order scripts-markup-styles ./**/*.svelte"
+  },
   "devDependencies": {
     "@babel/core": "^7.5.5",
     "@babel/plugin-syntax-dynamic-import": "^7.2.0",
@@ -27,7 +33,7 @@
     "postcss-load-config": "^3.0.1",
     "prettier": "^2.2.1",
     "prettier-plugin-svelte": "^2.2.0",
-    "svelte": "^3.31.2",
+    "svelte": "^3.47.0",
     "svelte-loader": "^3.0.0",
     "svelte-preprocess": "^4.7.0",
     "url-loader": "^4.1.1",
@@ -36,29 +42,17 @@
     "webpack-cli": "^4.4.0",
     "webpack-dev-server": "^3.11.2"
   },
-  "scripts": {
-    "build": "cross-env NODE_ENV=production webpack",
-    "dev": "webpack serve --content-base public",
-    "analyze": "NODE_ENV=production webpack --env.analyze=true --mode=production --progress",
-    "format": "prettier --write --svelte-sort-order scripts-markup-styles ./**/*.svelte"
-  },
   "dependencies": {
     "@babel/runtime": "^7.7.7",
+    "classnames": "^2.3.1",
     "dexie": "^3.2.1",
     "mini-html-webpack-plugin": "^3.1.3",
     "moment": "^2.29.2",
     "pdf": "^0.1.0",
-    "svelte": "^3.31.2",
-    "svelte-inline-svg": "^1.1.2",
+    "svelte": "^3.47.0",
     "svelte-material-ui": "^5.0.0-beta.5",
     "webpack-plugin-serve": "^1.6.0"
   },
-  "browserslist": [
-    "last 1 version",
-    "> 1%",
-    "maintained node versions",
-    "not dead"
-  ],
   "husky": {
     "hooks": {
       "pre-commit": "lint-staged"

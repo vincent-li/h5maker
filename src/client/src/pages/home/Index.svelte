@@ -1,7 +1,7 @@
 <script>
     import { onMount } from 'svelte';
-    import SVG from 'svelte-inline-svg';
-    // import { navigate, link } from "svelte-routing";
+    import SvgIcon from '@components/svg-icons/Icon.svelte';
+    import addPageSvg from '@components/svg-icons/addPage.svg';
     import moment from 'moment';
     import { getUuid } from '@src/helper';
     import db from '@src/db';
@@ -19,7 +19,6 @@
     import Textfield, { Input } from '@smui/textfield';
     import CharacterCounter from '@smui/textfield/character-counter';
     import { Label } from '@smui/common';
-    import addPageSvg from '@components/svg-icons/addPage.svg';
 
     // 打开新建弹窗
     let open = false;
@@ -98,17 +97,16 @@
 </script>
 
 <div class="page-container" style="padding: 16px;">
-    <div
-        class="tools-bar"
-        style="display: flex; align-items: center; justify-content: space-between;"
-    >
-        <div
-            style="display: flex; align-items: center;margin-left: 4px;"
+    <div class="tool-bar" style="margin-bottom:16px;">
+        <a
+            class="alink"
+            style="margin-left: 4px;"
+            href="#;"
             on:click={() => (open = true)}
         >
-            <SVG src={addPageSvg} style="width:18px;height:18px;"/>
-            <span>新建页面</span>
-        </div>
+            <SvgIcon data={addPageSvg} width="18px" height="18px" />
+            <span style="margin-left: 4px;">新建页面</span>
+        </a>
         <div class="searh-container solo-paper">
             <Icon class="material-icons">search</Icon>
             <Input
@@ -217,9 +215,13 @@
                 style="display: flex; align-items: center;margin-left: 4px;"
                 on:click={() => (open = true)}
             >
-                <span class="onep-icon" style="margin-right: 9px;"
-                    >{@html addPageSvg}</span
-                >
+                <span class="onep-icon" style="margin-right: 9px;">
+                    <SvgIcon
+                        data={addPageSvg}
+                        width="18px"
+                        height="18px"
+                    />
+                </span>
                 <span>新建页面</span>
             </div>
         </div>

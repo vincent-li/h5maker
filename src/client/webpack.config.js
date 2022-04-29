@@ -51,7 +51,7 @@ module.exports = function (env) {
 
     const config = {
         entry,
-        target: ['web'],
+        target: 'web',
         resolve: {
             alias: {
                 svelte: path.dirname(require.resolve('svelte/package.json')),
@@ -108,7 +108,7 @@ module.exports = function (env) {
                     ],
                 },
                 {
-                    test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
+                    test: /\.(png|jpe?g|gif)(\?.*)?$/,
                     loader: 'url-loader',
                     options: {
                         limit: 10000,
@@ -137,6 +137,10 @@ module.exports = function (env) {
                     resolve: {
                         fullySpecified: false,
                     },
+                },
+                {
+                    test: /\.svg$/,
+                    type: 'asset/source',
                 },
             ],
         },
@@ -173,7 +177,6 @@ module.exports = function (env) {
             //     },
             // },
         },
-        // devServer: parts.devServer(),
     };
 
     return config;
