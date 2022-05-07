@@ -55,6 +55,7 @@ module.exports = function (env) {
         resolve: {
             alias: {
                 svelte: path.dirname(require.resolve('svelte/package.json')),
+                '@public': path.resolve(__dirname, './public'),
                 '@src': path.resolve(__dirname, './src'),
                 '@pages': path.resolve(__dirname, './src/pages'),
                 '@modules': path.resolve(__dirname, './src/modules'),

@@ -1,20 +1,27 @@
 <script>
-    import Icon from '@components/svg-icons/Icon.svelte';
-    import GobackSvg from '@components/svg-icons/goback.svg';
+    import SvgIcon from '@components/svg-icons';
     import Button from '@components/button';
-    import Tools from '@modules/assemble-tools';
+    import Tools from './Tools.svelte';
+    import Preview from './Preview.svelte';
+    import Setting from '@modules/assemble-setting';
+    import { configType } from '@pages/assemble/store';
+    import { onMount } from 'svelte';
+    // const getDom = document.getElementById
+    onMount(() => {
+        // dragula([document.getElementById('js_tools_drag_trigger')], {
+        //     // copy: true,
+        //     revertOnSpill: true,
+        // }).on('shadow', (el)=>{
+        //     console.log('----->')
+        // });
+    });
 </script>
 
 <div class="page-container">
     <div class="assemble-top-bar">
         <div>
             <a class="alink" href="/home" target="_self">
-                <Icon
-                    data={GobackSvg}
-                    width="18px"
-                    height="18px"
-                    fill="#155bd4"
-                />
+                <SvgIcon type="GoBack" size="18px" fill="#155bd4" />
                 <span style="margin-left: 4px;">返回页面列表</span>
             </a>
         </div>
@@ -29,8 +36,12 @@
         <div class="assemble-tools">
             <Tools />
         </div>
-        <div class="assemble-preview" />
-        <div class="assemble-setting" />
+        <div class="assemble-preview">
+            <Preview />
+        </div>
+        <div class="assemble-setting">
+            <Setting {...$configType} />
+        </div>
     </div>
 </div>
 
@@ -45,7 +56,6 @@
         justify-content: space-between;
         align-items: center;
         background-color: #fff;
-        box-shadow: 0 1px 0 0 rgb(0 0 0 / 10%);
         padding: 0 16px;
         box-sizing: border-box;
     }
@@ -61,8 +71,9 @@
         top: 0;
         bottom: 0;
         left: 0;
-        width: 176px;
+        width: 184px;
         padding: 16px 12px;
+        box-sizing: border-box;
     }
     .assemble-preview {
         position: absolute;

@@ -1,12 +1,22 @@
-<button class={ClassNames('ant-btn', className, {
-    'primary': false,
-    'default': true
-  })} style={style} on:click>
+<script>
+    import ClassNames from 'classnames';
+    export let className = '';
+    export let style = '';
+</script>
+
+<button
+    class={ClassNames('sad-btn', className, {
+        primary: false,
+        default: true,
+    })}
+    {style}
+    on:click
+>
     <slot />
 </button>
 
 <style>
-    .ant-btn {
+    .sad-btn {
         line-height: 1.5715;
         position: relative;
         display: inline-block;
@@ -31,33 +41,9 @@
         border-color: #d9d9d9;
         background: #fff;
     }
-    .ant-btn:hover{
+    .sad-btn:hover {
         color: #40a9ff;
         border-color: #40a9ff;
         background: #fff;
     }
 </style>
-<script context="module">
-   let totalComponents = 0;
-    // 此处允许执行import操作，例如
-    // `import Example, { alertTotal } from './Example.svelte'`
-    export function alertTotal() {
-        alert(totalComponents);
-    }
-</script>
-<script>
-    import ClassNames from 'classnames' 
-    
-    import { createEventDispatcher } from 'svelte';
-
-    const dispatch = createEventDispatcher();
-
-    function handleClick() {
-        dispatch('abc');
-    }
-
-    totalComponents += 1;
-    console.log('我是第几个组件实例===》', totalComponents)
-    export let className = '';
-    export let style = '';
-</script>
