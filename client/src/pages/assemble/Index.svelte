@@ -4,7 +4,6 @@
     import Tools from './Tools.svelte';
     import Preview from './Preview.svelte';
     import Setting from '@modules/assemble-setting';
-    import { configType } from '@pages/assemble/store';
     import { onMount } from 'svelte';
     // const getDom = document.getElementById
     onMount(() => {
@@ -40,7 +39,7 @@
             <Preview />
         </div>
         <div class="assemble-setting">
-            <Setting {...$configType} />
+            <Setting />
         </div>
     </div>
 </div>

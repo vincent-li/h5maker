@@ -1,8 +1,13 @@
 <script>
     import PageSetting from './PageSetting.svelte';
     import SetTitleText from './SetTitleText.svelte';
-    export let type = '';
-    export let name = '';
+    import { configType } from '@pages/assemble/store';
+    let type = '';
+    let name = '';
+    configType.subscribe((val) => {
+        type = val.type;
+        name = val.name;
+    });
 </script>
 
 <div class="setting-title">
