@@ -1,24 +1,12 @@
 <script>
     import { onMount } from 'svelte';
-    import SvgIcon from '@components/svg-icons/Icon.svelte';
+    import Modal from '@components/modal'
+    import SvgIcon from '@components/svg-icons';
     import addPageSvg from '@components/svg-icons/addPage.svg';
     import moment from 'moment';
     import { getUuid } from '@src/helper';
     import db from '@src/db';
-    import DataTable, {
-        Head,
-        Body,
-        Row,
-        Cell,
-        Pagination,
-    } from '@smui/data-table';
-    import Select, { Option } from '@smui/select';
-    import IconButton, { Icon } from '@smui/icon-button';
-    import Dialog, { Title, Content, Actions } from '@smui/dialog';
-    import Button from '@smui/button';
-    import Textfield, { Input } from '@smui/textfield';
-    import CharacterCounter from '@smui/textfield/character-counter';
-    import { Label } from '@smui/common';
+    
 
     // 打开新建弹窗
     let open = false;
@@ -104,22 +92,22 @@
             href="#;"
             on:click={() => (open = true)}
         >
-            <SvgIcon data={addPageSvg} width="18px" height="18px" />
+            <SvgIcon type="AddPage" size="18px" />
             <span style="margin-left: 4px;">新建页面</span>
         </a>
         <div class="searh-container solo-paper">
-            <Icon class="material-icons">search</Icon>
+            <!-- <Icon class="material-icons">search</Icon>
             <Input
                 bind:value={searchKey}
                 on:keydown={handleKeyDown}
                 placeholder="搜索"
                 class="solo-input"
-            />
+            /> -->
         </div>
     </div>
     {#if items && items.length}
-        <DataTable table$aria-label="Todo list" style="width: 100%;">
-            <Head>
+        <table style="width: 100%;">
+            <!-- <Head>
                 <Row>
                     <Cell>ID</Cell>
                     <Cell>UUID</Cell>
@@ -206,8 +194,8 @@
                     on:click={() => (currentPage = lastPage)}
                     disabled={currentPage === lastPage}>last_page</IconButton
                 >
-            </Pagination>
-        </DataTable>
+            </Pagination> -->
+        </table>
     {:else}
         <div class="table-none">
             <div>当前没有页面，</div>
@@ -228,36 +216,16 @@
     {/if}
 </div>
 
-<Dialog
+<Modal
     bind:open
     scrimClickAction=""
     escapeKeyAction=""
     aria-labelledby="fullscreen-title"
     aria-describedby="fullscreen-content"
 >
-    <Title id="mandatory-title">新建页面</Title>
-    <Content id="mandatory-content" style="width:450px;">
-        <div class="form-item-container">
-            <Textfield
-                bind:value={formData.title}
-                label="标题"
-                input$maxlength={18}
-                required
-                style="width:100%;"
-            >
-                <CharacterCounter slot="helper">0 / 18</CharacterCounter>
-            </Textfield>
-        </div>
-    </Content>
-    <Actions>
-        <Button on:click={submitForm}>
-            <Label>新建</Label>
-        </Button>
-        <Button on:click={() => (open = false)}>
-            <Label>取消</Label>
-        </Button>
-    </Actions>
-</Dialog>
+    <div id="mandatory-title">新建页面</div>
+        
+</Modal>
 
 <style>
     * :global(a.abutton) {

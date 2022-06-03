@@ -1,16 +1,74 @@
 <script>
+    import Postmate from 'postmate';
+    import { onMount } from 'svelte';
     import SvgIcon from '@components/svg-icons';
-    import { configType } from '@pages/assemble/store';
+    import { configType, draggingTarget, sid } from '@pages/assemble/store';
+    // 获取iframe dom
+    let iFramePlace;
+    let iFrameOverlay;
+    let iFrame = null;
+    
+    function handleDragOver(e) {
+        let { x, y } = iFrameOverlay.getBoundingClientRect();
+        let offsetY = e.clientY - y;
+        let offsetX = e.clientX - x;
+        iFrame.call('parentAction', {
+            action: 'dragging',
+            param: {
+                x: offsetX,
+                y: offsetY
+            },
+        });
+    }
+
+    function handleDrop() {
+        iFrame.call('parentAction', {
+            action: 'drop',
+            param: $draggingTarget,
+        });
+    }
+
+    function handleSelected(){
+
+        configType.set({})
+    }
+
+    onMount(() => {
+        const handshake = new Postmate({
+            container: iFramePlace,
+            url: `/preview?sid=${$sid}`, // Page to load, must have postmate.js. This will also be the origin used for communication.
+            name: 'preview-iframe', // Set Iframe name attribute. Useful to get `window.name` in the child.
+            classListArray: ['preview-iframe'], //Classes to add to the iframe via classList, useful for styling.
+        });
+
+        handshake.then((child) => {
+            iFrame = child;
+
+            child
+                .get('height')
+                .then((height) => (child.frame.style.height = `${height}px`));
+
+            child.on('childAction', ({ action, param }) => {
+                switch (action) {
+                    case 'selected':
+                        handleSelected();
+                        break;
+                    default:
+                        break;
+                }
+            });
+        });
+    });
 </script>
 
 <div class="iframe-place">
-    <div class="iframe-place-wrap">
-        <iframe
-            title="预览"
-            src="/preview"
-            width="100%"
-            height="844"
-            frameborder="0"
+    <div class="iframe-place-wrap" bind:this={iFramePlace}>
+        <div
+            class="iframe-place-overlay"
+            bind:this={iFrameOverlay}
+            on:dragover={handleDragOver}
+            on:drop={handleDrop}
+            ondragover="return false"
         />
     </div>
 </div>
@@ -29,7 +87,7 @@
         on:click={() =>
             configType.set({ type: 'ManageComponents', name: '组件管理' })}
     >
-        <SvgIcon type="GlobalComponentsList" size="12px"/>
+        <SvgIcon type="GlobalComponentsList" size="12px" />
         <span class="mgl6">组件管理</span>
     </div>
     <div
@@ -37,7 +95,7 @@
         on:click={() =>
             configType.set({ type: 'OperateRecord', name: '历史记录' })}
     >
-        <SvgIcon type="GlobalHistory" size="12px"/>
+        <SvgIcon type="GlobalHistory" size="12px" />
         <span class="mgl6">历史记录</span>
     </div>
 </div>
@@ -45,18 +103,25 @@
 <style>
     .iframe-place {
         position: absolute;
-        width: 100%;
-        height: 100%;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: -14px;
+        overflow: auto;
     }
     .iframe-place-wrap {
-        position: relative;
-        top: 32px;
+        position: absolute;
+        top: 0;
         display: flex;
         justify-content: center;
         width: 100%;
-        height: 100%;
-        overflow-x: hidden;
-        overflow-y: auto;
+    }
+    .iframe-place-overlay {
+        position: absolute;
+        top: 32px;
+        left: 0;
+        bottom: 32px;
+        right: 0;
     }
     .global-settings {
         position: absolute;
@@ -79,5 +144,10 @@
         display: flex;
         align-items: center;
         justify-content: center;
+    }
+    * :global(.preview-iframe) {
+        width: 100%;
+        height: 844px;
+        margin: 32px 0;
     }
 </style>

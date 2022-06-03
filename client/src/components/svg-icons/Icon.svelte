@@ -12,6 +12,10 @@
     import GlobalPageSetting from './globalPageSetting.svg';
     import GlobalComponentsList from './globalComponentsList.svg';
     import GlobalHistory from './globalHistory.svg';
+    // 左侧工具分类
+    import SidebarUI from './sidebarUI.svg';
+    import SideBarData from './sidebarData.svg';
+    import SidebarLeftArrow from './sidebarLeftArrow.svg'
     // 左侧工具栏中的操作按钮
     import ToolsText from './toolsText.svg';
 
@@ -26,6 +30,9 @@
         OperateDown,
         OperateCopy,
         OperateDelete,
+        SidebarUI,
+        SideBarData,
+        SidebarLeftArrow,
         ToolsText,
     };
 </script>

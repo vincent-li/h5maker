@@ -4,16 +4,8 @@
     import Tools from './Tools.svelte';
     import Preview from './Preview.svelte';
     import Setting from '@modules/assemble-setting';
-    import { onMount } from 'svelte';
-    // const getDom = document.getElementById
-    onMount(() => {
-        // dragula([document.getElementById('js_tools_drag_trigger')], {
-        //     // copy: true,
-        //     revertOnSpill: true,
-        // }).on('shadow', (el)=>{
-        //     console.log('----->')
-        // });
-    });
+    import { sid } from './store';
+    console.log('sid------->', $sid);
 </script>
 
 <div class="page-container">
@@ -33,6 +25,17 @@
     </div>
     <div class="assemble-body">
         <div class="assemble-tools">
+            <div class="side-bar">
+                <div class="side-bar-catgory">
+                    <SvgIcon type="SidebarUI" size="32" />
+                </div>
+                <div class="side-bar-catgory">
+                    <SvgIcon type="SideBarData" size="24" />
+                </div>
+                <div class="side-bar-arrow">
+                    <SvgIcon type="SidebarLeftArrow" size="16" fill="#ebedf0" />
+                </div>
+            </div>
             <Tools />
         </div>
         <div class="assemble-preview">
@@ -45,6 +48,14 @@
 </div>
 
 <style>
+    :global(html), :global(body) {
+		margin: 0; 
+		height: 100%; 
+		overflow: hidden;
+		user-select: none;
+		-webkit-user-select: none;
+	}
+
     .assemble-top-bar {
         position: fixed;
         top: 0;
@@ -70,18 +81,48 @@
         top: 0;
         bottom: 0;
         left: 0;
-        width: 184px;
+        width: 240px;
         padding: 16px 12px;
         box-sizing: border-box;
+    }
+    .side-bar {
+        width: 48px;
+        position: absolute;
+        border-right: 1px solid #ebedf0;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        background-color: #fff;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 16px 0;
+    }
+    .side-bar-arrow {
+        position: absolute;
+        right: -2px;
+        display: inline-block;
+        width: 2px;
+        height: 14px;
+        background-color: #fff;
+        border: none;
+    }
+    * :global(.side-bar-arrow > svg) {
+        position: absolute;
+        top: -1px;
+        left: -11px;
+    }
+    .side-bar-catgory {
+        box-sizing: border-box;
+        padding: 8px;
+        cursor: pointer;
     }
     .assemble-preview {
         position: absolute;
         top: 0;
         bottom: 0;
-        left: 176px;
+        left: 240px;
         right: 376px;
-        overflow-y: auto;
-        overflow-x: hidden;
         background-color: #f7f8fa;
     }
     .assemble-setting {
@@ -90,5 +131,6 @@
         bottom: 0;
         right: 0;
         width: 376px;
+        background: #FFF;
     }
 </style>

@@ -147,13 +147,13 @@ module.exports = function (env) {
         },
         mode,
         plugins: [
+            ...htmlPlugins,
             new MiniCssExtractPlugin({
                 filename: 'public/css/[name].[contenthash].css',
             }),
             new CopyPlugin({
                 patterns: [{ from: './public', to: './public' }],
             }),
-            ...htmlPlugins,
             new BundleAnalyzerPlugin({
                 analyzerMode: 'public',
                 openAnalyzer: !!(env && env.analyze),
